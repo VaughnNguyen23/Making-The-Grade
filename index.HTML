@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="main.css">
+    <title>Student Grades</title>
+</head>
+<body>
+  <div id="container">
+    <h1>Student Grades</h1>
+    <div id="studentData"></div>
+    <h2>By: Vaughn Nguyen</h2>
+    <h3>This page takes data on grades from ten students and display each student name and score, 
+      capitalize the first letter of student name,
+      display total nuber of students,
+      display the lowest, highest, and average scores </h3>
+  </div>
+    <script>
+        var grades = "jim|25, sue|32, mary|34, ann|22, ted|28, frank|15, lisa|19, mike|30, ahn|26, vishaya|27";
+
+// Step 1: Split the string into an array of students
+var students = grades.split(", ");
+
+// Step 2: Initialize variables for lowest, highest, and sum
+var lowestScore = Infinity;
+var highestScore = -Infinity;
+var sum = 0;
+
+// Step 3: Iterate over each student
+var studentData = "";
+for (var i = 0; i < students.length; i++) {
+  // Step 4: Split the student into name and score
+  var parts = students[i].split("|");
+  var name = parts[0];
+  var score = parseInt(parts[1]);
+
+  // Step 5: Update lowest, highest, and sum
+  if (score < lowestScore) {
+    lowestScore = score;
+  }
+  if (score > highestScore) {
+    highestScore = score;
+  }
+  sum += score;
+
+  // Step 6: Create the formatted student data
+  studentData += "<p>" + capitalizeFirstLetter(name) + " - " + score + "</p>";
+}
+
+// Step 7: Calculate the average score
+var averageScore = sum / students.length;
+
+// Step 8: Display the student data and statistics
+var output = "<h2>Student Data:</h2>" + studentData +
+             "<h2>Statistics:</h2>" +
+             "<p>Total Students: " + students.length + "</p>" +
+             "<p>Lowest Score: " + lowestScore + "</p>" +
+             "<p>Highest Score: " + highestScore + "</p>" +
+             "<p>Average Score: " + averageScore.toFixed(2) + "</p>";
+
+document.getElementById("studentData").innerHTML = output;
+
+// Function to capitalize the first letter of a string
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+    </script>
+</body>
+</html>
